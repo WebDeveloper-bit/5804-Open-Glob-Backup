@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "DataMigrationDFNew"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureDatabricksPOC_accessToken": {
+			"value": ""
+		},
+		"Sftp1_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://sftpstorenew.dfs.core.windows.net/"
+		},
+		"AzureDatabricksPOC_properties_typeProperties_existingClusterId": {
+			"value": "0220-120521-axm8koyn"
+		},
+		"Sftp1_properties_typeProperties_host": {
+			"value": "sftpstorenew.blob.core.windows.net"
+		},
+		"Sftp1_properties_typeProperties_userName": {
+			"value": "sftpstorenew.archivedata.sftpdemo"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
