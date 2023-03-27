@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"ZipFileName": {
+			"FolderName": {
 				"type": "string"
 			}
 		},
@@ -16,13 +16,13 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@dataset().ZipFileName",
+					"value": "@dataset().FolderName",
 					"type": "Expression"
 				},
+				"folderPath": "Big_ALL_FOLDERS",
 				"fileSystem": "archivedata"
 			},
 			"columnDelimiter": ",",
-			"compressionCodec": "ZipDeflate",
 			"escapeChar": "\\",
 			"quoteChar": "\""
 		},

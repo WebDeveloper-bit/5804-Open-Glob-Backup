@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileSystem": "output"
+				"folderPath": "All_Attachments",
+				"fileSystem": "archivedata"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
