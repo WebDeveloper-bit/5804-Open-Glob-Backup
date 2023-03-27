@@ -3,11 +3,109 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [],
-			"sinks": [],
-			"transformations": [],
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText14",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DelimitedText15",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText16",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select1"
+				}
+			],
 			"scriptLines": [
-				""
+				"source(output(",
+				"          ParentId as string,",
+				"          Id as string,",
+				"          Name as string,",
+				"          BodyLength as string,",
+				"          ContentType as string,",
+				"          CreatedById as string,",
+				"          CreatedDate as string,",
+				"          IsDeleted as string,",
+				"          Description as string,",
+				"          LastModifiedById as string,",
+				"          LastModifiedDate as string,",
+				"          OwnerId as string,",
+				"          IsPrivate as string,",
+				"          SystemModstamp as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          Id as string,",
+				"          ParentId as string,",
+				"          CaseNumber as string,",
+				"          AccountId as string,",
+				"          Origin as string,",
+				"          Type as string,",
+				"          Contact_Center_Queue__c as string,",
+				"          CreatedDate as string,",
+				"          Status as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source2",
+				"source1, source2 join(source1@ParentId == source2@Id,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          ParentId = source1@ParentId,",
+				"          Id = source1@Id,",
+				"          Name,",
+				"          CaseNumber,",
+				"          ContentType,",
+				"          CreatedById,",
+				"          CreatedDate = source1@CreatedDate,",
+				"          IsDeleted,",
+				"          Description,",
+				"          LastModifiedById,",
+				"          LastModifiedDate,",
+				"          OwnerId,",
+				"          IsPrivate,",
+				"          SystemModstamp,",
+				"          AccountId,",
+				"          Origin,",
+				"          Type,",
+				"          Contact_Center_Queue__c,",
+				"          CreatedDate = source2@CreatedDate,",
+				"          Status",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
