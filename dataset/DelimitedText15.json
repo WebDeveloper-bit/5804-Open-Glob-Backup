@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Cases_Data.csv",
-				"folderPath": "All_Attachments",
+				"fileName": "case.csv",
+				"folderPath": "T1_attachment",
 				"fileSystem": "archivedata"
 			},
 			"columnDelimiter": ",",
